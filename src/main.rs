@@ -1,6 +1,7 @@
-pub use app::App;
+mod rss;
+mod app;
 
-pub mod app;
+use crate::app::App;
 
 fn main() -> color_eyre::Result<()> {
     color_eyre::install()?;
