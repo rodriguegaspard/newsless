@@ -1,4 +1,3 @@
-mod rss;
 mod app;
 
 use crate::app::App;
