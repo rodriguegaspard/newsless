@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:media="http://search.yahoo.com/mrss/">
+
+  <channel>
+    <title>Example Test Feed</title>
+    <link>https://example.com</link>
+    <description>A comprehensive test RSS feed for validating parsers and readers.</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 19 Dec 2025 12:00:00 GMT</lastBuildDate>
+    <generator>ChatGPT RSS Generator</generator>
+    <atom:link href="https://example.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <!-- VALID ITEM -->
+    <item>
+      <title>First Test Article</title>
+      <link>https://example.com/articles/first-test</link>
+      <guid isPermaLink="true">https://example.com/articles/first-test</guid>
+      <pubDate>Fri, 19 Dec 2025 10:00:00 GMT</pubDate>
+      <description><![CDATA[<p>Valid item.</p>]]></description>
+    </item>
+
+    <!-- VALID ITEM -->
+    <item>
+      <title>Second Test Item</title>
+      <link>https://example.com/articles/second-test</link>
+      <guid isPermaLink="false">example-002</guid>
+      <pubDate>Thu, 18 Dec 2025 16:30:00 GMT</pubDate>
+      <description><![CDATA[<p>Valid item.</p>]]></description>
+    </item>
+
+    <!-- ======================= -->
+    <!-- BROKEN ITEMS START HERE -->
+    <!-- ======================= -->
+
+    <!-- BROKEN ITEM #1: Missing BOTH title and link (invalid per RSS spec) -->
+    <item>
+      <guid>broken-item-no-title-no-link</guid>
+      <pubDate>Wed, 17 Dec 2025 09:00:00 GMT</pubDate>
+      <description><![CDATA[
+        <p>This item should not be parsed because it has no title or link.</p>
+      ]]></description>
+    </item>
+
+    <!-- BROKEN ITEM #2: Invalid pubDate format -->
+    <item>
+      <title>Broken Date Item</title>
+      <link>https://example.com/articles/broken-date</link>
+      <guid>broken-item-invalid-date</guid>
+      <pubDate>2025-12-19T99:99:99</pubDate>
+      <description><![CDATA[
+        <p>Invalid RFC-822 date format.</p>
+      ]]></description>
+    </item>
+  </channel>
+</rss>
