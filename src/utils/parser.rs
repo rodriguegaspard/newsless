@@ -16,3 +16,10 @@ fn parse_valid_xml() {
     let string = channel.to_string();
     println!("{}", string);
 }
+
+#[test]
+fn catch_bad_xml() {
+    let file = File::open("tests/bad_feed.xml").unwrap();
+    let channel = Channel::read_from(BufReader::new(file));
+    assert!(channel.is_err(), "Expected parsing to fail for bad XML");
+}
