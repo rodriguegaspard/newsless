@@ -1,5 +1,6 @@
 mod app;
 mod utils;
+mod ui;
 
 use crate::app::App;
 
