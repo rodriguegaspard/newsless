@@ -7,11 +7,11 @@ pub trait Database {
         Self: Sized;
 }
 
-pub struct FeedDatabase{
+pub struct FeedDatabase {
     conn: Connection,
 }
 
-pub struct StationDatabase{
+pub struct StationDatabase {
     conn: Connection,
 }
 
@@ -19,7 +19,7 @@ impl FeedDatabase {
     pub fn new(database_path: &str) -> FeedDatabase {
         FeedDatabase {
             conn: FeedDatabase::connect(database_path)
-                .expect("ERROR: Could not open the feed database.")
+                .expect("ERROR: Could not open the feed database."),
         }
     }
 }
@@ -28,7 +28,7 @@ impl StationDatabase {
     pub fn new(database_path: &str) -> StationDatabase {
         StationDatabase {
             conn: FeedDatabase::connect(database_path)
-                .expect("ERROR: Could not open the station database.")
+                .expect("ERROR: Could not open the station database."),
         }
     }
 }
@@ -111,52 +111,26 @@ mod tests {
 
     #[test]
     fn feed_database_init() {
-        let temp_file = NamedTempFile::new().expect("Failed to create temp file for feed database.");
+        let temp_file =
+            NamedTempFile::new().expect("Failed to create temp file for feed database.");
         let db = FeedDatabase::new(temp_file.path().to_str().unwrap());
         db.init().unwrap();
-        assert!(db.
-            conn.
-            table_exists(None, "feeds").
-            unwrap());
-        assert!(db
-            .conn
-            .column_exists(None, "feeds", "id")
-            .unwrap());
-        assert!(db
-            .conn
-            .column_exists(None, "feeds", "title")
-            .unwrap());
-        assert!(db
-            .conn.
-            column_exists(None, "feeds", "url")
-            .unwrap());
-        assert!(db
-            .conn
-            .column_exists(None, "feeds", "pub_date")
-            .unwrap());
+        assert!(db.conn.table_exists(None, "feeds").unwrap());
+        assert!(db.conn.column_exists(None, "feeds", "id").unwrap());
+        assert!(db.conn.column_exists(None, "feeds", "title").unwrap());
+        assert!(db.conn.column_exists(None, "feeds", "url").unwrap());
+        assert!(db.conn.column_exists(None, "feeds", "pub_date").unwrap());
     }
 
     #[test]
     fn station_database_init() {
-        let temp_file = NamedTempFile::new().expect("Failed to create temp file for station database.");
+        let temp_file =
+            NamedTempFile::new().expect("Failed to create temp file for station database.");
         let db = StationDatabase::new(temp_file.path().to_str().unwrap());
         db.init().unwrap();
-        assert!(db.
-            conn.
-            table_exists(None, "stations").
-            unwrap());
-        assert!(db
-            .conn
-            .column_exists(None, "stations", "id")
-            .unwrap());
-        assert!(db
-            .conn
-            .column_exists(None, "stations", "name")
-            .unwrap());
-        assert!(db
-            .conn.
-            column_exists(None, "stations", "url")
-            .unwrap());
+        assert!(db.conn.table_exists(None, "stations").unwrap());
+        assert!(db.conn.column_exists(None, "stations", "id").unwrap());
+        assert!(db.conn.column_exists(None, "stations", "name").unwrap());
+        assert!(db.conn.column_exists(None, "stations", "url").unwrap());
     }
-
 }
